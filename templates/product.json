@@ -1,0 +1,138 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "aiod_all_in_1_discount_free_gift_topbar_kbYj34": {
+          "type": "shopify://apps/aiod-all-in-1-discount/blocks/free-gift-topbar/9537caf0-36d5-4981-a648-8961a8e85652",
+          "disabled": true,
+          "settings": {}
+        },
+        "fad_auto_discounts_fad_display_offers_hKkj6D": {
+          "type": "shopify://apps/fad-auto-discounts/blocks/FAD-display-offers/4b6810b7-b33d-468c-9916-327aeb4c800b",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "bundle_3pkyJA": {
+          "type": "bundle",
+          "settings": {
+            "bundle_product": "asian-stylish-women-clogs"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "fad_auto_discounts_fad_upsell_bar_YrNDEV": {
+          "type": "shopify://apps/fad-auto-discounts/blocks/FAD-upsell-bar/4b6810b7-b33d-468c-9916-327aeb4c800b",
+          "settings": {}
+        },
+        "fad_auto_discounts_fad_upsell_items_fQphFP": {
+          "type": "shopify://apps/fad-auto-discounts/blocks/FAD-upsell-items/4b6810b7-b33d-468c-9916-327aeb4c800b",
+          "settings": {
+            "upsell_item_id": 4
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "aiod_all_in_1_discount_free_gift_topbar_kbYj34",
+        "fad_auto_discounts_fad_display_offers_hKkj6D",
+        "buy_buttons",
+        "bundle_3pkyJA",
+        "description",
+        "share",
+        "fad_auto_discounts_fad_upsell_bar_YrNDEV",
+        "fad_auto_discounts_fad_upsell_items_fQphFP"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}
