@@ -88,6 +88,37 @@
           <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
             {%- if cart != empty -%}
               <div class="drawer__cart-items-wrapper">
+                {% if settings.enable_free_shipping %}
+                  {% assign free_shipping_threshold = settings.free_shipping_threshold | times: 100 %}
+                  {% assign cart_total = cart.total_price %}
+                  {% assign remaining_amount = free_shipping_threshold | minus: cart_total | money %}
+                  {% assign progress_percentage = cart_total
+                    | times: 100
+                    | divided_by: free_shipping_threshold
+                    | at_most: 100
+                  %}
+
+                  <div class="free-shipping-bar-wrapper">
+                    <div class="free-shipping-message">
+                      {% if cart_total >= free_shipping_threshold %}
+                        {{ settings.free_shipping_success_message }}
+                      {% else %}
+                        {{
+                          settings.free_shipping_remaining_message
+                          | replace: '[amount]', remaining_amount
+                        }}
+                      {% endif %}
+                    </div>
+
+                    <div class="free-shipping-progress">
+                      <div
+                        class="free-shipping-progress-fill"
+                        style="width: {{ progress_percentage }}%;"
+                      ></div>
+                    </div>
+                  </div>
+                {% endif %}
+
                 {% comment %}
                   {% if settings.enable_free_gift %}
                     {% assign gift_threshold = settings.gift_threshold | times: 100 %}
@@ -103,74 +134,76 @@
                   {% endif %}
                 {% endcomment %}
 
-                {% if settings.enable_free_gift %}
-                  {% assign gift_threshold = settings.gift_threshold | times: 100 %}
-                  {% assign amount_left = gift_threshold | minus: cart.total_price %}
+                {% comment %}
+                  {% if settings.enable_free_gift %}
+                    {% assign gift_threshold = settings.gift_threshold | times: 100 %}
+                    {% assign amount_left = gift_threshold | minus: cart.total_price %}
 
-                  {% assign gift_1 = all_products[settings.gift_product_1] %}
-                  {% assign gift_2 = all_products[settings.gift_product_2] %}
+                    {% assign gift_1 = all_products[settings.gift_product_1] %}
+                    {% assign gift_2 = all_products[settings.gift_product_2] %}
 
-                  {% assign has_free_gift = false %}
-                  {% for item in cart.items %}
-                    {% if item.properties._free_gift == 'true' %}
-                      {% assign has_free_gift = true %}
-                      {{ has_free_gift }}
-                    {% endif %}
-                  {% endfor %}
+                    {% assign has_free_gift = false %}
+                    {% for item in cart.items %}
+                      {% if item.properties._free_gift == 'true' %}
+                        {% assign has_free_gift = true %}
+                        {{ has_free_gift }}
+                      {% endif %}
+                    {% endfor %}
 
-                  <div id="progress-message">
-                    {% if amount_left > 0 %}
-                      <p>You're only {{ amount_left | money }} away from FREE product</p>
-                    {% else %}
-                      <p>Congrats! You've unlocked a FREE product </p>
-                    {% endif %}
-                  </div>
+                    <div id="progress-message">
+                      {% if amount_left > 0 %}
+                        <p>You're only {{ amount_left | money }} away from FREE product</p>
+                      {% else %}
+                        <p>Congrats! You've unlocked a FREE product </p>
+                      {% endif %}
+                    </div>
 
-                  {% if amount_left <= 0 %}
-                    {% comment %} {% if amount_left <= 0 and has_free_gift == false %} {% endcomment %}
-                    <div id="free-gift-wrapper">
-                      <h4>Select Your Free Gift</h4>
+                    {% if amount_left <= 0 %}
+                      {% comment %} {% if amount_left <= 0 and has_free_gift == false %} {% endcomment %}
+                      <div id="free-gift-wrapper">
+                        <h4>Select Your Free Gift</h4>
 
-                      <div class="gift-list">
-                        
-                        <div class="gift-item">
-                            {% if gift_1.featured_image %}
-                              <img 
-                                src="{{ gift_1.featured_image | image_url }}" 
-                                alt="{{ gift_1.title }}"
-                                width="150"
-                                height=""
-                              >
-                            {% endif %}
-                          <p>{{ gift_1.title }}</p>
-                          <button
-                            class="select-gift-btn"
-                            data-variant="{{ gift_1.variants.first.id }}"
-                          >
-                            Add Gift
-                          </button>
-                        </div>
+                        <div class="gift-list">
 
-                       
-                        <div class="gift-item">
-                           <img 
-                                src="{{ gift_2.featured_image | image_url }}" 
-                                alt="{{ gift_2.title }}"
-                                width="150"
-                                height=""
-                              >
-                          <p>{{ gift_2.title }}</p>
-                          <button
-                            class="select-gift-btn"
-                            data-variant="{{ gift_2.variants.first.id }}"
-                          >
-                            Add Gift
-                          </button>
+                          <div class="gift-item">
+                              {% if gift_1.featured_image %}
+                                <img
+                                  src="{{ gift_1.featured_image | image_url }}"
+                                  alt="{{ gift_1.title }}"
+                                  width="150"
+                                  height=""
+                                >
+                              {% endif %}
+                            <p>{{ gift_1.title }}</p>
+                            <button
+                              class="select-gift-btn"
+                              data-variant="{{ gift_1.variants.first.id }}"
+                            >
+                              Add Gift
+                            </button>
+                          </div>
+
+
+                          <div class="gift-item">
+                             <img
+                                  src="{{ gift_2.featured_image | image_url }}"
+                                  alt="{{ gift_2.title }}"
+                                  width="150"
+                                  height=""
+                                >
+                            <p>{{ gift_2.title }}</p>
+                            <button
+                              class="select-gift-btn"
+                              data-variant="{{ gift_2.variants.first.id }}"
+                            >
+                              Add Gift
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    {% endif %}
                   {% endif %}
-                {% endif %}
+                {% endcomment %}
                 <table class="cart-items" role="table">
                   <thead role="rowgroup">
                     <tr role="row">
